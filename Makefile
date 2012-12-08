@@ -354,8 +354,8 @@ CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 CFLAGS_MODULE   =
 AFLAGS_MODULE   =
 LDFLAGS_MODULE  =
-CFLAGS_KERNEL	=
-AFLAGS_KERNEL	=
+CFLAGS_KERNEL	= -mtune=cortex-a15 -march=armv7-a -mfpu=vfpv4 -mfloat-abi=softfp -ftree-vectorize -mvectorize-with-neon-quad -fpredictive-commoning -fipa-cp-clone -fgcse-after-reload -funswitch-loops -floop-interchange -floop-strip-mine -floop-block -flto -fmodulo-sched -fmodulo-sched-allow-regmoves -pipe
+AFLAGS_KERNEL	= -mtune=cortex-a15 -march=armv7-a -mfpu=vfpv4 -mfloat-abi=softfp -ftree-vectorize -mvectorize-with-neon-quad -fpredictive-commoning -fipa-cp-clone -fgcse-after-reload -funswitch-loops -floop-interchange -floop-strip-mine -floop-block -flto -fmodulo-sched -fmodulo-sched-allow-regmoves -pipe
 CFLAGS_GCOV	= -fprofile-arcs -ftest-coverage
 
 
@@ -372,7 +372,25 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
-		   -fno-delete-null-pointer-checks
+		   -Wno-maybe-uninitialized \
+		   -fno-delete-null-pointer-checks \
+		   -mtune=cortex-a15 \
+		   -march=armv7-a \
+		   -mfpu=vfpv4 \
+		   -mfloat-abi=softfp \
+		   -ftree-vectorize \
+		   -mvectorize-with-neon-quad \
+		   -fpredictive-commoning \
+		   -fipa-cp-clone \
+		   -fgcse-after-reload \
+		   -funswitch-loops \
+		   -floop-interchange \
+		   -floop-strip-mine \
+		   -floop-block \
+		   -flto \
+		   -fmodulo-sched \
+		   -fmodulo-sched-allow-regmoves \
+		   -pipe
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
 KBUILD_AFLAGS   := -D__ASSEMBLY__
